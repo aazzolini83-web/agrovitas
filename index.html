@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agrovitas — Semillas y productos agrícolas y pecuarios | Valencia, Venezuela</title>
+<meta name="description" content="Más de 40 años surtiendo al agricultor y al huerto familiar venezolano con semillas y productos agrícolas y pecuarios. Escríbenos por WhatsApp o llámanos.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --ink:#141b26;
+    --ink-soft:#232c3a;
+    --amber:#e9a13a;
+    --amber-deep:#c67e1f;
+    --leaf:#3c7d49;
+    --leaf-deep:#2c5c37;
+    --paper:#faf6ec;
+    --paper-dim:#f1ead9;
+    --soil:#6b4a32;
+    --text:#25241d;
+    --text-soft:#5b5748;
+    --line: rgba(37,36,29,0.12);
+    --radius: 6px;
+    --maxw: 1160px;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    font-family:'Inter', system-ui, sans-serif;
+    color:var(--text);
+    background:var(--paper);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+    color:var(--ink);
+  }
+
+  .lede{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    color:var(--amber-deep);
+    font-size:1.05rem;
+    margin:0 0 10px;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 24px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:0.95rem;
+    text-decoration:none;
+    border:1.5px solid transparent;
+    cursor:pointer;
+    transition:transform .15s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn:hover{ transform:translateY(-1px); }
+  .btn:focus-visible{ outline:3px solid var(--amber); outline-offset:2px; }
+  .btn-primary{ background:var(--leaf); color:#fff; }
+  .btn-primary:hover{ background:var(--leaf-deep); }
+  .btn-ghost{ background:transparent; border-color:rgba(255,255,255,0.55); color:#fff; }
+  .btn-ghost:hover{ border-color:#fff; background:rgba(255,255,255,0.08); }
+  .btn-dark{ background:var(--ink); color:#fff; }
+  .btn-dark:hover{ background:var(--ink-soft); }
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(20,27,38,0.96);
+    backdrop-filter:blur(6px);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 28px;
+    max-width:var(--maxw); margin:0 auto;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .brand img{ height:38px; width:auto; border-radius:4px; }
+  .navlinks{ display:flex; align-items:center; gap:30px; list-style:none; margin:0; padding:0; }
+  .navlinks a{
+    color:#eae5d6; text-decoration:none; font-size:0.95rem; font-weight:500;
+    padding:6px 2px; border-bottom:2px solid transparent;
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .navlinks a:hover{ border-color:var(--amber); color:#fff; }
+  .nav-cta{ display:flex; align-items:center; gap:14px; }
+  .nav-cta a.btn{ padding:10px 20px; font-size:0.88rem; }
+  .menu-btn{
+    display:none; background:none; border:none; color:#fff; font-size:1.6rem; cursor:pointer;
+    padding:4px 8px;
+  }
+
+  @media (max-width: 880px){
+    .navlinks{
+      position:absolute; top:100%; left:0; right:0;
+      flex-direction:column; align-items:flex-start; gap:0;
+      background:var(--ink); padding:6px 28px 18px;
+      display:none;
+    }
+    .navlinks.open{ display:flex; }
+    .navlinks a{ width:100%; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .menu-btn{ display:block; }
+    .nav-cta .btn-ghost{ display:none; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    min-height:88vh;
+    display:flex; align-items:flex-end;
+    background:
+      linear-gradient(0deg, rgba(18,22,15,0.88) 0%, rgba(18,22,15,0.55) 42%, rgba(18,22,15,0.35) 100%),
+      url('assets/images/hero-campo.jpg') center 70% / cover no-repeat;
+  }
+  .hero-inner{ max-width:var(--maxw); margin:0 auto; padding:90px 28px 64px; width:100%; }
+  .hero h1{
+    color:#fff; font-size:clamp(2.1rem, 5vw, 3.4rem); line-height:1.08; max-width:16ch;
+    font-weight:600;
+  }
+  .hero p.sub{
+    color:#e9e4d4; font-size:1.1rem; max-width:52ch; margin:20px 0 32px;
+  }
+  .hero .actions{ display:flex; flex-wrap:wrap; gap:14px; }
+
+  .marquee{
+    background:var(--paper-dim);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .marquee .wrap{
+    display:flex; flex-wrap:wrap; gap:0;
+    padding:26px 28px;
+  }
+  .marquee .stat{
+    flex:1 1 200px; padding:6px 24px; border-left:1px solid var(--line);
+  }
+  .marquee .stat:first-child{ border-left:none; padding-left:0; }
+  .marquee .stat b{
+    display:block; font-family:'Fraunces', serif; font-size:2rem; color:var(--ink); font-weight:600;
+  }
+  .marquee .stat span{ color:var(--text-soft); font-size:0.92rem; }
+
+  /* ---------- section basics ---------- */
+  section{ padding:86px 0; }
+  .section-head{ max-width:640px; margin-bottom:44px; }
+  .section-head h2{ font-size:clamp(1.7rem,3vw,2.3rem); }
+
+  /* ---------- quienes somos ---------- */
+  .about{ background:var(--paper); }
+  .about-grid{
+    display:grid; grid-template-columns: 0.9fr 1.1fr; gap:56px; align-items:center;
+  }
+  .about-grid img{ border-radius:var(--radius); width:100%; height:340px; object-fit:cover; }
+  .about-text p{ color:var(--text-soft); font-size:1.02rem; }
+  .about-list{ list-style:none; margin:24px 0 0; padding:0; display:grid; gap:14px; }
+  .about-list li{ display:flex; gap:12px; align-items:flex-start; font-size:0.98rem; }
+  .about-list .dot{
+    flex:none; width:8px; height:8px; border-radius:50%; background:var(--leaf); margin-top:8px;
+  }
+
+  @media (max-width: 820px){
+    .about-grid{ grid-template-columns:1fr; }
+    .about-grid img{ height:260px; }
+  }
+
+  /* ---------- productos ---------- */
+  .products{ background:var(--ink); color:#efe9d8; }
+  .products .section-head h2{ color:#fff; }
+  .products .lede{ color:var(--amber); }
+  .products .section-head p{ color:#c7c0ac; }
+
+  .featured-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:20px;
+    margin-bottom:64px;
+  }
+  .p-card{
+    background:var(--ink-soft); border-radius:var(--radius); overflow:hidden;
+    border:1px solid rgba(255,255,255,0.06);
+  }
+  .p-card .img-box{ height:150px; overflow:hidden; }
+  .p-card img{ width:100%; height:100%; object-fit:cover; }
+  .p-card .cap{ padding:14px 16px 18px; }
+  .p-card .cap h4{ color:#fff; font-size:1.05rem; margin-bottom:4px; }
+  .p-card .cap span{ color:var(--amber); font-size:0.82rem; font-weight:500; }
+
+  .catalog-note{
+    display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    margin-bottom:22px; padding-bottom:14px; border-bottom:1px solid rgba(255,255,255,0.14);
+  }
+  .catalog-note h3{ color:#fff; font-size:1.3rem; }
+  .catalog-note p{ color:#c7c0ac; margin:0; font-size:0.92rem; }
+
+  .catalog{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:0 48px;
+  }
+  .cat-group{ margin-bottom:30px; break-inside:avoid; }
+  .cat-group h4{
+    color:var(--amber); font-family:'Inter',sans-serif; font-weight:700; font-size:0.82rem;
+    letter-spacing:0.03em; margin-bottom:12px; padding-bottom:8px;
+    border-bottom:1px solid rgba(255,255,255,0.14);
+  }
+  .cat-group table{ width:100%; border-collapse:collapse; }
+  .cat-group td{
+    padding:7px 0; font-size:0.93rem; border-bottom:1px dashed rgba(255,255,255,0.08);
+    vertical-align:baseline;
+  }
+  .cat-group td.sp{ color:#f3efe2; }
+  .cat-group td.var{ color:#8f8a78; text-align:right; font-size:0.85rem; }
+
+  @media (max-width: 780px){
+    .catalog{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- siembra ---------- */
+  .siembra{ background:var(--paper-dim); }
+  .steps{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px; counter-reset:step;
+  }
+  .step{ position:relative; padding-top:8px; }
+  .step .num{
+    font-family:'Fraunces', serif; font-size:2.4rem; color:var(--amber-deep); font-weight:600;
+    line-height:1; margin-bottom:10px; display:block;
+  }
+  .step h4{ font-size:1.15rem; margin-bottom:8px; }
+  .step p{ color:var(--text-soft); font-size:0.95rem; margin:0; }
+
+  @media (max-width: 780px){ .steps{ grid-template-columns:1fr; } }
+
+  /* ---------- contacto ---------- */
+  .contact{ background:var(--paper); }
+  .contact-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:stretch;
+  }
+  .contact-card{
+    background:var(--ink); color:#fff; border-radius:var(--radius); padding:40px 36px;
+    display:flex; flex-direction:column; justify-content:space-between; gap:28px;
+  }
+  .contact-card h3{ color:#fff; font-size:1.6rem; }
+  .contact-card p{ color:#c7c0ac; }
+  .contact-links{ list-style:none; margin:0; padding:0; display:grid; gap:16px; }
+  .contact-links a{
+    display:flex; align-items:center; gap:14px; text-decoration:none; color:#fff;
+    font-size:1.02rem; font-weight:500;
+  }
+  .contact-links .ico{
+    flex:none; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.08);
+    display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+  }
+  .contact-links small{ display:block; color:#a19c8a; font-weight:400; font-size:0.82rem; margin-top:2px; }
+
+  .contact-photo{ border-radius:var(--radius); overflow:hidden; min-height:260px; }
+  .contact-photo img{ width:100%; height:100%; object-fit:cover; }
+
+  .map-box{ margin-top:26px; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); }
+  .map-box iframe{ width:100%; height:280px; border:0; display:block; }
+
+  @media (max-width: 880px){
+    .contact-grid{ grid-template-columns:1fr; }
+    .contact-photo{ min-height:220px; }
+  }
+
+  /* ---------- footer ---------- */
+  footer{ background:var(--ink); color:#a19c8a; padding:44px 0 28px; }
+  .foot-top{
+    display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:20px;
+    padding-bottom:28px; margin-bottom:22px; border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  .foot-top img{ height:34px; }
+  .foot-links{ display:flex; gap:26px; list-style:none; padding:0; margin:0; flex-wrap:wrap; }
+  .foot-links a{ color:#c7c0ac; text-decoration:none; font-size:0.92rem; }
+  .foot-links a:hover{ color:#fff; }
+  .foot-bottom{ font-size:0.82rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+
+  .wa-float{
+    position:fixed; bottom:22px; right:22px; z-index:60;
+    width:58px; height:58px; border-radius:50%; background:var(--leaf);
+    display:flex; align-items:center; justify-content:center; color:#fff;
+    text-decoration:none; box-shadow:0 8px 22px rgba(0,0,0,0.28);
+    font-size:1.6rem;
+    transition:transform .2s ease;
+  }
+  .wa-float:hover{ transform:scale(1.06); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .btn, .wa-float{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#top" class="brand">
+      <img src="assets/images/logo-agrovitas.jpg" alt="Agrovitas — Productos agrícolas y pecuarios">
+    </a>
+    <ul class="navlinks" id="navlinks">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#siembra">Cómo sembrar</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="tel:+584169496592">📞 0416-949 6592</a>
+      <a class="btn btn-primary" href="https://wa.me/584169496592" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="lede" style="color:var(--amber)">Desde hace más de 40 años, surco a surco</p>
+      <h1>Semillas y productos para el campo y el huerto venezolano</h1>
+      <p class="sub">Somos una empresa familiar de Valencia dedicada a acompañar al agricultor y al huerto familiar con semillas y productos agrícolas y pecuarios de confianza.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://wa.me/584169496592" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+        <a class="btn btn-ghost" href="#productos">Ver catálogo de semillas</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee">
+    <div class="wrap">
+      <div class="stat"><b>+40 años</b><span>Sirviendo al agricultor venezolano</span></div>
+      <div class="stat"><b>30+ variedades</b><span>De semillas para huertos familiares</span></div>
+      <div class="stat"><b>Valencia</b><span>Carabobo, Venezuela</span></div>
+    </div>
+  </div>
+
+  <!-- NOSOTROS -->
+  <section class="about" id="nosotros">
+    <div class="wrap about-grid">
+      <img src="assets/images/brote.jpg" alt="Brote de plántula recién germinada">
+      <div class="about-text">
+        <p class="lede">Quiénes somos</p>
+        <h2>Una empresa familiar con más de cuatro décadas en el área agrícola</h2>
+        <p>Llevamos más de 40 años trabajando en el sector agrícola de Venezuela, liderando el mercado de semillas y productos agrícolas y pecuarios. Empezamos como un negocio familiar y seguimos siéndolo: eso significa atención directa y productos pensados tanto para el productor como para quien apenas está armando su huerto en casa.</p>
+        <ul class="about-list">
+          <li><span class="dot"></span> Semillas seleccionadas para huertos familiares y siembra a mayor escala.</li>
+          <li><span class="dot"></span> Productos agrícolas y pecuarios para el día a día del campo.</li>
+          <li><span class="dot"></span> Atención cercana, directa y sin intermediarios.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS -->
+  <section class="products" id="productos">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="lede">Nuestro catálogo</p>
+        <h2>Semillas para cada rincón del huerto</h2>
+        <p>Estas son algunas de nuestras presentaciones más pedidas, y debajo el catálogo completo de especies y variedades que manejamos.</p>
+      </div>
+
+      <div class="featured-grid">
+        <article class="p-card">
+          <div class="img-box"><img src="assets/images/productos/berenjena.jpg" alt="Semillas de berenjena"></div>
+          <div class="cap"><h4>Berenjena</h4><span>Larga Morada</span></div>
+        </article>
+        <article class="p-card">
+          <div class="img-box"><img src="assets/images/productos/brocoli.jpg" alt="Semillas de brócoli"></div>
+          <div class="cap"><h4>Brócoli</h4><span>Waltham</span></div>
+        </article>
+        <article class="p-card">
+          <div class="img-box"><img src="assets/images/productos/calabacin.jpg" alt="Semillas de calabacín"></div>
+          <div class="cap"><h4>Calabacín</h4><span>Caserta</span></div>
+        </article>
+        <article class="p-card">
+          <div class="img-box"><img src="assets/images/productos/cebolla.jpg" alt="Semillas de cebolla"></div>
+          <div class="cap"><h4>Cebolla</h4><span>Texas 502 PPR</span></div>
+        </article>
+        <article class="p-card">
+          <div class="img-box"><img src="assets/images/productos/cebollin.jpg" alt="Semillas de cebollín"></div>
+          <div class="cap"><h4>Cebollín</h4><span>Evergreen</span></div>
+        </article>
+        <article class="p-card">
+          <div class="img-box"><img src="assets/images/productos/cilantro.jpg" alt="Semillas de cilantro"></div>
+          <div class="cap"><h4>Cilantro</h4><span>Coriander</span></div>
+        </article>
+        <article class="p-card">
+          <div class="img-box"><img src="assets/images/productos/perejil.jpg" alt="Semillas de perejil"></div>
+          <div class="cap"><h4>Perejil Liso</h4><span>Gigante</span></div>
+        </article>
+        <article class="p-card">
+          <div class="img-box"><img src="assets/images/productos/pimenton.jpg" alt="Semillas de pimentón"></div>
+          <div class="cap"><h4>Pimentón</h4><span>Resistente No.3</span></div>
+        </article>
+        <article class="p-card">
+          <div class="img-box"><img src="assets/images/productos/repollo.jpg" alt="Semillas de repollo"></div>
+          <div class="cap"><h4>Repollo</h4><span>Wisconsin</span></div>
+        </article>
+        <article class="p-card">
+          <div class="img-box"><img src="assets/images/productos/apioespana.jpg" alt="Semillas de apio España"></div>
+          <div class="cap"><h4>Apio España</h4><span>Tall Authah</span></div>
+        </article>
+        <article class="p-card">
+          <div class="img-box"><img src="assets/images/productos/auyama.jpg" alt="Semillas de auyama"></div>
+          <div class="cap"><h4>Auyama</h4><span>Cubana</span></div>
+        </article>
+      </div>
+
+      <div class="catalog-note">
+        <h3>Catálogo completo de semillas</h3>
+        <p>Todas venden en presentación para huerto familiar · consulta disponibilidad por WhatsApp</p>
+      </div>
+
+      <div class="catalog">
+        <div class="cat-group">
+          <h4>Hojas y aromáticas</h4>
+          <table>
+            <tr><td class="sp">Acelga</td><td class="var">Penca Ancha</td></tr>
+            <tr><td class="sp">Ajo Porro</td><td class="var">American Flag</td></tr>
+            <tr><td class="sp">Cebollín</td><td class="var">Evergreen</td></tr>
+            <tr><td class="sp">Cilantro</td><td class="var">Coriander</td></tr>
+            <tr><td class="sp">Espinaca</td><td class="var">Tetragonia</td></tr>
+            <tr><td class="sp">Lechuga Americana</td><td class="var">Gran Lago</td></tr>
+            <tr><td class="sp">Lechuga Criolla</td><td class="var">Black Seed</td></tr>
+            <tr><td class="sp">Perejil Liso</td><td class="var">Gigante</td></tr>
+            <tr><td class="sp">Perejil Rizado</td><td class="var">Keystone</td></tr>
+          </table>
+        </div>
+        <div class="cat-group">
+          <h4>Raíces y bulbos</h4>
+          <table>
+            <tr><td class="sp">Apio España</td><td class="var">Tall Authah</td></tr>
+            <tr><td class="sp">Cebolla</td><td class="var">Texas 502 PPR</td></tr>
+            <tr><td class="sp">Cebolla Roja</td><td class="var">Red Creole</td></tr>
+            <tr><td class="sp">Rábano</td><td class="var">Scarlet</td></tr>
+            <tr><td class="sp">Remolacha</td><td class="var">Early Wonder</td></tr>
+            <tr><td class="sp">Zanahoria</td><td class="var">Chantenay</td></tr>
+          </table>
+        </div>
+        <div class="cat-group">
+          <h4>Coles</h4>
+          <table>
+            <tr><td class="sp">Brócoli</td><td class="var">Waltham</td></tr>
+            <tr><td class="sp">Coliflor</td><td class="var">Snow Ball</td></tr>
+            <tr><td class="sp">Repollo</td><td class="var">Wisconsin</td></tr>
+          </table>
+          <h4 style="margin-top:26px;">Leguminosas</h4>
+          <table>
+            <tr><td class="sp">Vainitas</td><td class="var">Provaider</td></tr>
+          </table>
+        </div>
+        <div class="cat-group">
+          <h4>Frutos, solanáceas y cucurbitáceas</h4>
+          <table>
+            <tr><td class="sp">Ají Dulce</td><td class="var">Llanero</td></tr>
+            <tr><td class="sp">Ají Picante</td><td class="var">Chili</td></tr>
+            <tr><td class="sp">Auyama</td><td class="var">Cubana</td></tr>
+            <tr><td class="sp">Berenjena</td><td class="var">Larga Morada</td></tr>
+            <tr><td class="sp">Calabacín</td><td class="var">Caserta</td></tr>
+            <tr><td class="sp">Lechosa</td><td class="var">Cartagena</td></tr>
+            <tr><td class="sp">Melón</td><td class="var">Edisto 47</td></tr>
+            <tr><td class="sp">Parchita</td><td class="var">Maracuyá</td></tr>
+            <tr><td class="sp">Patilla</td><td class="var">Charleston</td></tr>
+            <tr><td class="sp">Pepino</td><td class="var">Poisett 76</td></tr>
+            <tr><td class="sp">Pimentón</td><td class="var">Resistente No.3</td></tr>
+            <tr><td class="sp">Pimiento</td><td class="var">Marconi</td></tr>
+            <tr><td class="sp">Tomate Manzano</td><td class="var">Floradade</td></tr>
+            <tr><td class="sp">Tomate Perita</td><td class="var">Río Grande</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIEMBRA -->
+  <section class="siembra" id="siembra">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="lede">De la bolsa a la tierra</p>
+        <h2>Cómo sembrar tus semillas</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="num">01</span>
+          <h4>Prepara el semillero</h4>
+          <p>Usa un terreno suave y rastrillado, homogéneo, con buen drenaje y libre de hierbas. Mientras más fértil el lecho, mejor arranque tendrá la semilla.</p>
+        </div>
+        <div class="step">
+          <span class="num">02</span>
+          <h4>Siembra y riega</h4>
+          <p>Destapa el sobre sobre un área de 1 a 5 m² y riega dos veces al día. La germinación suele tardar entre 5 y 10 días según la especie.</p>
+        </div>
+        <div class="step">
+          <span class="num">03</span>
+          <h4>Trasplanta al surco</h4>
+          <p>Cuando la planta alcance 10 a 15 cm, trasplántala dejando la distancia recomendada entre plantas y entre surcos según la especie.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contact" id="contacto">
+    <div class="wrap contact-grid">
+      <div class="contact-card">
+        <div>
+          <p class="lede" style="color:var(--amber)">Hablemos</p>
+          <h3>Escríbenos, llámanos o pasa por Valencia</h3>
+          <p>Nuestra pasión por la agricultura va más allá de la venta: queremos que a cada huerto y a cada siembra le vaya bien. Cualquier duda sobre disponibilidad o variedades, con gusto te orientamos.</p>
+        </div>
+        <ul class="contact-links">
+          <li>
+            <a href="https://wa.me/584169496592" target="_blank" rel="noopener">
+              <span class="ico">💬</span>
+              <span>WhatsApp<small>0416-949 6592</small></span>
+            </a>
+          </li>
+          <li>
+            <a href="tel:+584169496592">
+              <span class="ico">📞</span>
+              <span>Llamar<small>0416-949 6592</small></span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:agrovitas@yahoo.com">
+              <span class="ico">✉️</span>
+              <span>Correo<small>agrovitas@yahoo.com</small></span>
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="return false;" style="cursor:default;">
+              <span class="ico">📍</span>
+              <span>Ubicación<small>Valencia, Carabobo, Venezuela</small></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="contact-photo">
+        <img src="assets/images/contacto-campo.jpg" alt="Cultivo al amanecer en Venezuela">
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="map-box">
+        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Valencia,+Carabobo,+Venezuela&output=embed"
+          title="Mapa de Valencia, Carabobo, Venezuela"></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <img src="assets/images/logo-agrovitas.jpg" alt="Agrovitas">
+      <ul class="foot-links">
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#siembra">Cómo sembrar</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="https://wa.me/584169496592" target="_blank" rel="noopener">WhatsApp</a></li>
+      </ul>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Agrovitas — Productos Agrícolas y Pecuarios. Valencia, Venezuela.</span>
+      <span>Semillas para huertos familiares desde hace más de 40 años.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/584169496592" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">💬</a>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  var menuBtn = document.getElementById('menuBtn');
+  var navlinks = document.getElementById('navlinks');
+  menuBtn.addEventListener('click', function(){
+    var open = navlinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navlinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      navlinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false');
+    });
+  });
+</script>
+
+</body>
+</html>
